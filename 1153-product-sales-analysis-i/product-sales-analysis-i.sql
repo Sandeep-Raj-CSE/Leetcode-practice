@@ -8,7 +8,7 @@ select p.product_name, s.year, s.price
 
 From Sales AS s
 
-INNER JOIN 
+LEFT JOIN
 
 Product AS p
 
