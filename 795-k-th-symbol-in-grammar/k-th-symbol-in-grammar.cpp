@@ -11,7 +11,13 @@ public:
         int ans=kthGrammar(n-1,(k+1)/2);
 
         if(k%2 == 0){
-            return (ans==1) ? 0:1;
+            if(ans==1){
+                return 0;
+            }else{
+
+                return 1;
+
+            }
         }else{
 
             return ans;
