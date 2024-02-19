@@ -46,23 +46,29 @@ public:
     int first=-1;
     int last=-1;
 
-    for(int i=0; i<nums.size();i++){
+    // for(int i=0; i<nums.size();i++){
 
-        if(nums[i]==target){
-            if(first==-1){
-                first=i;
-            }
-            last=i;
-        }
+    //     if(nums[i]==target){
+    //         if(first==-1){
+    //             first=i;
+    //         }
+    //         last=i;
+    //     }
 
-    }
+    // }
 
+vector<int>ans;
+    auto lb=lower_bound(nums.begin(),nums.end(),target)-nums.begin();
+    auto up=(upper_bound(nums.begin(),nums.end(),target)-nums.begin());
+
+   if(lb == nums.size() || nums[lb]!=target){
+       return {-1,-1};
+   }
+
+   ans.push_back(lb);
+   ans.push_back(up-1);
+   return ans;
    
-
-    res.push_back(first);
-    res.push_back(last);
-    return res;
-
 
 
 
