@@ -1,30 +1,24 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        
-        // using BS
 
-        for(int i=0; i<nums.size();i++){
+        int l = 0;
+        int r= nums.size()-1;
 
-            int l = i+1;
-            int r= nums.size()-1;
+        while(l < r){
 
-            int temp = target - nums[i];
+            int curr = nums[l] + nums [r];
 
-            while(l<=r)
-            {
-                int mid = l + (r - l)/2;
-
-                if(nums[mid] == temp){
-                    return {i+1, mid +1};
-                }else if(nums[mid] < temp){
-                    l = mid +1;
-                }else{
-                    r = mid -1;
-                }
-
+            if(curr > target){
+                r--;
+            }else if(curr < target){
+                l++;
+            }else if(curr == target){
+                return {l+1 , r+1};
             }
         }
+
         return {};
+        
     }
 };
