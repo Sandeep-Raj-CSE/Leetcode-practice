@@ -1,77 +1,60 @@
 class Solution {
 public:
+
+    int first(vector<int>&nums , int target){
+        int start = 0;
+        int end = nums.size()-1;
+        int ans = -1;
+
+        while(start <= end){
+            int mid = start + (end - start)/2;
+
+            if(nums[mid] == target){
+                ans = mid;
+                end = mid -1;
+            }else if(nums[mid] > target){
+                end = mid-1;
+            }else{
+                start = mid +1;
+            }
+        }
+        return ans;
+    }
+
+
+    int last(vector<int>&nums , int target){
+        int start = 0;
+        int end = nums.size()-1;
+        int ans = -1;
+
+        while(start <= end){
+            int mid = start + (end - start)/2;
+
+            if(nums[mid] == target){
+                ans = mid;
+                start = mid + 1;
+            }else if(nums[mid] > target){
+                end = mid-1;
+            }else{
+                start = mid +1;
+            }
+        }
+        return ans;
+    }
+
     vector<int> searchRange(vector<int>& nums, int target) {
-
-    //     vector<int>ans;
-    //     for(int i=0; i<nums.size();i++){
-    //         if(nums[i]==target){
-    //             ans.push_back(i);
-    //             break;
-    //         }
-    //     }
-    //    // ans.push_back(-1);
-    //   //  cout<<ans<<endl;
-
-    //    for(int j=nums.size()-1;j > 0;j--){
-    //        if(nums[j]==target){
-    //            ans.push_back(j);
-    //            break;
-    //        }
-         
-    //    }
-
-    //    for(int i=0; i<ans.size();i++){
-    //        cout<<ans[i]<<endl;
-    //    }
-
-    //     return ans;
-
-
-    // find lower bound index
-
-    // vector<int>ans;
-
-    // auto lb=lower_bound(nums.begin(),nums.end(),target)-nums.begin();
-    // cout<<lb<<endl;
-    // auto up=(upper_bound(nums.begin(),nums.end(),target)-nums.begin())-1;
-    // cout<<up<<endl;
-    // ans.push_back(lb);
-    // ans.push_back(up);
-    // return ans;
-
-
-   // vector<vector<int,int>> ans;
-    vector<int>res;
-
-    int first=-1;
-    int last=-1;
-
-    // for(int i=0; i<nums.size();i++){
-
-    //     if(nums[i]==target){
-    //         if(first==-1){
-    //             first=i;
-    //         }
-    //         last=i;
-    //     }
-
-    // }
-
-vector<int>ans;
-    auto lb=lower_bound(nums.begin(),nums.end(),target)-nums.begin();
-    auto up=(upper_bound(nums.begin(),nums.end(),target)-nums.begin());
-
-   if(lb == nums.size() || nums[lb]!=target){
-       return {-1,-1};
-   }
-
-   ans.push_back(lb);
-   ans.push_back(up-1);
-   return ans;
-   
-
-
-
         
+        vector<vector<int>>ans;
+ 
+        int res1 = first(nums,target);
+        int res2=  last(nums, target);
+
+       
+
+        return {res1, res2};
+        
+
+         
+
     }
 };
