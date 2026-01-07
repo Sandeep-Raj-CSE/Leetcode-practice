@@ -1,60 +1,53 @@
 class Solution {
 public:
-
-    int first(vector<int>&nums , int target){
-        int start = 0;
-        int end = nums.size()-1;
+    int upperBound(vector<int> &nums, int x){
         int ans = -1;
+        int left = 0;
+        int right = nums.size()-1;
 
-        while(start <= end){
-            int mid = start + (end - start)/2;
+        while(left <= right){
+            int mid = left + (right - left)/2;
 
-            if(nums[mid] == target){
+            if(nums[mid] > x){
                 ans = mid;
-                end = mid -1;
-            }else if(nums[mid] > target){
-                end = mid-1;
+                right = mid - 1;
             }else{
-                start = mid +1;
+                left = mid + 1;
             }
         }
         return ans;
     }
 
-
-    int last(vector<int>&nums , int target){
-        int start = 0;
-        int end = nums.size()-1;
+    int lowerBound(vector<int> &nums, int x){
+        int n = nums.size();
+        int left = 0;
+        int right = n-1;
         int ans = -1;
 
-        while(start <= end){
-            int mid = start + (end - start)/2;
+        while(left <= right){
+            int mid = left + (right - left)/2;
 
-            if(nums[mid] == target){
+            if(nums[mid] >= x){
                 ans = mid;
-                start = mid + 1;
-            }else if(nums[mid] > target){
-                end = mid-1;
+                right = mid - 1;
             }else{
-                start = mid +1;
+                left = mid + 1;
             }
         }
         return ans;
     }
-
+    
     vector<int> searchRange(vector<int>& nums, int target) {
+        int lo = lowerBound(nums, target);  // First occurrence
         
-        vector<vector<int>>ans;
- 
-        int res1 = first(nums,target);
-        int res2=  last(nums, target);
-
-       
-
-        return {res1, res2};
+        // If target not found
+        if(lo == -1 || nums[lo] != target){
+            return {-1, -1};
+        }
         
-
-         
-
+        int up = upperBound(nums, target);  // First element > target
+        int last = (up == -1) ? nums.size()-1 : up-1;  // Last occurrence
+        
+        return {lo, last};
     }
 };
