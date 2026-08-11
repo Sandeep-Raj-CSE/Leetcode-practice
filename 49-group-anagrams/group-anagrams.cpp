@@ -8,9 +8,9 @@ public:
         vector<vector<string>>ans;
 
         for(int i=0; i<n;i++){
-            string temp = strs[i];
-            sort(temp.begin(),temp.end());
-            mp[temp].push_back(strs[i]);
+            string temp = strs[i]; // 
+            sort(temp.begin(),temp.end()); //aet,aet,ant,aet,ant,abt
+            mp[temp].push_back(strs[i]);  // aet,eat
         }
 
         for(auto it:mp){
